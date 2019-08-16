@@ -15,13 +15,13 @@ class Stack
   end
 
   def push(value)
-    @data = LinkedListNode.new(value, @data)
+    @data = LinkedListNode.new(value, @data) #creates new node equal to previous node
   end
 
   def pop
-    return print "nil\n" if @data.nil?
-    print "#{@data.value}\n"
-    @data = @data.next_node
+    return print "nil\n" if @data.nil?      #check to see if node is empty
+    print "#{@data.value}\n"                #prints the first node
+    @data = @data.next_node                 
   end    
 end
 
@@ -36,7 +36,7 @@ end
   end
 
   def reverse_list(list)
-    stack = Stack.new
+    stack = Stack.new           #creates a stack utilizing Stack class
     while list
       stack.push(list.value)
       list = list.next_node
