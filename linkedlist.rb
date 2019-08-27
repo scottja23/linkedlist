@@ -8,48 +8,49 @@ class LinkedListNode
 end
 
 class Stack
-  attr_reader :data
+  attr_reader :last_node
 
   def initialize
-    @data = nil
+    @last_node = nil
   end
 
   def push(value)
-    @data = LinkedListNode.new(value, @data) #creates new node equal to previous node
+    @last_node = LinkedListNode.new(value, @last_node) #creates new node equal to previous node
   end
 
   def pop
-    return print "nil\n" if @data.nil?      #check to see if node is empty
-    print "#{@data.value}\n"                #prints the first node
-    @data = @data.next_node                 
-  end    
-end
+    return print "nil\n" if @last_node.nil?      #check to see if node is empty
+    print "#{@last_node.value}\n"                #prints the first node
+    @last_node = @last_node.next_node                 
+  end  
 
-  def print_values(list_node)
+  def print_values(list_node = @last_node)
     if list_node
       print "#{list_node.value} --> "
       print_values(list_node.next_node)
     else
       print "nil\n"
-      return
+    return
     end
-  end
+  end 
 
   def reverse_list(list)
     stack = Stack.new           #creates a stack utilizing Stack class
-    while list
-      stack.push(list.value)
-      list = list.next_node
-    end
+      while list
+        stack.push(list.value)
+        list = list.next_node
+      end
 
-    return stack.data
+    return stack.last_node
   end
 
-node1 = LinkedListNode.new(37)
-node2 = LinkedListNode.new(99, node1)
-node3 = LinkedListNode.new(12, node2)
+end
 
-print_values(node3)
+
+stack = Stack.new
+stack.push(5)
+stack.push(10)
+stack.push(15)
+
+stack.print_values
 puts "-------"
-revlist = reverse_list(node3)
-print_values(revlist)
